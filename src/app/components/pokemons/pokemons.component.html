@@ -5,15 +5,21 @@
     <br>
 
     <!-- Formulaire de recherche d'un Pokémon -->
-    <form class="form-inline" method="post" #pokemonSearch="ngForm">
-        <div class="form-group">
+    <form class="form-inline" method="post" #pokemonResearch="ngForm">
+        <div class="form-row">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-search"></i></div>
                 </div>
                 <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Rechercher..." name="search" 
-                       [(ngModel)]="searchForm.input">
+                       [(ngModel)]="searchForm.input" pattern="[a-zA-Z ]*" [class.is-invalid]=pokemonResearch.invalid>
+                       <div class="invalid-feedback col-md-7" >
+                        Le champ saisi ne doit comporter que des lettres.
+                    </div>
             </div>
+            <button *ngIf="searchForm.input !== '' && !pokemonResearch.invalid" 
+                    class="btn btn-outline-danger my-2 my-sm-0" type="submit" style="margin-left:10px;"
+                    (click)="searchForm.input=''">Annuler</button>
         </div>
     </form>
     
