@@ -1,1 +1,61 @@
-<p>pokemons works!</p>
+<div class="container">
+    <!-- Titre de la page -->
+    <h2>Pokémons dans l'ordre du Pokédex :</h2>
+    <hr />
+    <br>
+
+    <!-- Formulaire de recherche d'un Pokémon -->
+    <form class="form-inline" method="post" #pokemonSearch="ngForm">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-search"></i></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Rechercher..." name="search" 
+                       [(ngModel)]="searchForm.input">
+            </div>
+        </div>
+    </form>
+    
+    <br>
+
+
+    <!-- Gestion dynamique de l'en-tête du tableau -->
+    <h4 *ngIf="searchForm.input === ''; then researchOff else researchOn"></h4>
+    <ng-template #researchOff>
+        <h4>Les {{count}} premiers Pokémons :</h4>
+    </ng-template>
+    <ng-template #researchOn>
+        <h4>Résultats de la recherche :</h4>
+    </ng-template>
+
+    <!-- Liste des Pokémons -->
+    <table class="table">
+        <!-- Ligne d'en-tête -->
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Apperçu</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Categorie</th>
+                <th scope="col">Types</th>
+                <th scope="col">Taille</th>
+                <th scope="col">Poids</th>
+            </tr>
+        </thead>
+        <!-- Lignes de données avec itérations sur le nombre de Pokémons retournées par le service PokemonsService -->
+        <tbody *ngFor="let pokemon of pokemons">
+            <!-- Affichage du Pokémon uniquement s'il contient la chaîne de caractère saisie
+                 dans le champ de recherche (Tous affichés par défaut) -->
+            <tr *ngIf="pokemon.name.includes(searchForm.input)">
+                <th class="align-middle" scope="row">{{pokemon.id}}</th>
+                <td class="align-middle"><img src={{pokemon.img}} alt={{pokemon.name}}></td>
+                <td class="align-middle">{{pokemon.name | titlecase}}</td>
+                <td class="align-middle">{{pokemon.category}}</td>
+                <td class="align-middle">{{pokemon.types}}</td>
+                <td class="align-middle">{{pokemon.size | number:'1.0-4'}} m</td>
+                <td class="align-middle">{{pokemon.weight | number:'1.0-4'}} kg</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
