@@ -44,7 +44,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Apperçu</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Categorie</th>
                 <th scope="col">Types</th>
                 <th scope="col">Taille</th>
                 <th scope="col">Poids</th>
@@ -55,13 +54,13 @@
             <!-- Affichage du Pokémon uniquement s'il contient la chaîne de caractère saisie
                  dans le champ de recherche (Tous affichés par défaut) -->
             <tr *ngIf="pokemon.name.includes(searchForm.input)">
-                <th class="align-middle" scope="row">{{pokemon.id}}</th>
-                <td class="align-middle"><img src={{pokemon.img}} alt={{pokemon.name}}></td>
+                <th class="align-middle" scope="row">{{pokemon.id}} </th>
+                <td class="align-middle"><img src={{pokemon.sprites.front_default}} alt={{pokemon.name}}></td>
                 <td class="align-middle">{{pokemon.name | titlecase}}</td>
-                <td class="align-middle">{{pokemon.category}}</td>
-                <td class="align-middle">{{pokemon.types}}</td>
-                <td class="align-middle">{{pokemon.size | number:'1.0-4'}} m</td>
-                <td class="align-middle">{{pokemon.weight | number:'1.0-4'}} kg</td>
+                <td class="align-middle">
+                    <span *ngFor="let type of pokemon.types">{{type.type.name | titlecase}}<br></span></td>
+                <td class="align-middle">{{pokemon.height*0.1 | number:'1.0-4'}} m</td>
+                <td class="align-middle">{{pokemon.weight*0.1 | number:'1.0-4'}} kg</td>
             </tr>
         </tbody>
     </table>

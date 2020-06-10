@@ -1,21 +1,40 @@
 export class Pokemon {
-    /* Attributs de classe */
-    id: string;
-    img: string;
+    /* Attributs de classe (descrpition des données reçues par PokeAPI au format JSON) */
+    abilities: Array<Object>;
+    baseExperience: number;
+    forms: Array<Object>;
+    gameIndices: Array<Object>;
+    height: number;
+    heldItems: Array<Object>;
+    id: number;
+    isDefault: boolean;
+    locationAreaEncounters: string;
+    moves: Array<Object>;
     name: string;
-    category: string;
-    types: Array<string>;
-    size: number;
+    order: number;
+    species:{};
+    sprites: {
+        back_default: string;
+        back_female: string;
+        back_shiny: string;
+        back_shiny_female: string;
+        front_default: string;
+        front_female: string;
+        front_shiny: string;
+        front_shiny_female: string;
+    };
+    stats: Array<Object>;
+    types: [{
+        indice: [{
+            slot: number;
+            type: [{
+                name: string;
+                url: string;
+            }]
+        }]
+    }];
     weight: number;
 
     /* Constructeur de classe */
-    constructor( id: string, img: string, name: string, category: string, types: Array<string>, size: number, weight: number) {
-        this.id = id;
-        this.img = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+img;
-        this.name = name;
-        this.category = category;
-        this.types = types;
-        this.size = size;
-        this.weight = weight;
-    }
+    constructor() {}
 }
